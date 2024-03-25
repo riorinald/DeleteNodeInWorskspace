@@ -1,5 +1,5 @@
 ﻿using System;
-using CryptographyX;
+using CryptographyGCM;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -213,7 +213,7 @@ namespace DeleteNodeInWorskspace
             string credentialsDirectory = ConfigurationManager.AppSettings["SecureCredentialsPath"];
             string AESKeyFilePath = Path.Combine(credentialsDirectory, ConfigurationManager.AppSettings["SecureAESKey_Filename"]);
             string secureFilePath = Path.Combine(credentialsDirectory, secureFileName);
-            return Cryptography.ReadSensitiveData(secureFilePath, AESKeyFilePath);
+            return CryptographyAES_GCM.ReadEncryptedData(secureFilePath, AESKeyFilePath);
         }
     }
 }
