@@ -104,8 +104,21 @@ namespace DeleteNodeInWorskspace
             {
                 var CS_URL = ConfigurationManager.AppSettings["CS_REST_URL"];
                 var url = CS_URL + "v1/auth";
-                var otcs_username =  ConfigurationManager.AppSettings["OTCS_Username"];
-                var otcs_password = ConfigurationManager.AppSettings["OTCS_Password"];
+                bool UseSecureCredentials = bool.Parse(ConfigurationManager.AppSettings["UseSecureCredentials"]);
+                
+                string otcs_username;
+                string otcs_password;
+                
+                if (UseSecureCredentials)
+                {
+                    otcs_username = SecureInfo.getSensitiveInfo(ConfigurationManager.AppSettings["SecureOTCSUsername_Filename"]);
+                    otcs_password = SecureInfo.getSensitiveInfo(ConfigurationManager.AppSettings["SecureOTCSPassword_Filename"]);
+                }
+                else
+                {
+                    otcs_username = ConfigurationManager.AppSettings["otcs_Username"];
+                    otcs_password = ConfigurationManager.AppSettings["otcs_Password"];
+                }
 
                 var formContent = new FormUrlEncodedContent(new[]
                 {
